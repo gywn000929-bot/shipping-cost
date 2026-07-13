@@ -141,7 +141,7 @@ a{color:inherit;text-decoration:none}
 }
 </style></head><body>
 <div class="wrap">
-  <aside class="side" id="side"><div class="brand"><div class="t">대아홀딩스 수입물류</div><div class="s">선박·항공·통관 분석 포털</div><div class="v">📊 v2.0 · 2025.07~2026.07</div></div><div class="navgroup"><div class="gl">요약</div><div class="navlink" data-sec="ov"><span class="ic">🏠</span>개요</div></div><div class="navgroup"><div class="gl">물동량 추이 · 주간</div><div class="navlink" data-sec="ship"><span class="ic">🚢</span>선박 추이</div><div class="navlink" data-sec="air"><span class="ic">✈️</span>항공 추이</div><div class="navlink" data-sec="fac"><span class="ic">🏭</span>공장별 분석</div></div><div class="navgroup"><div class="gl">통관 · 비용 · 월간</div><div class="navlink" data-sec="cust"><span class="ic">💰</span>통관 실적(금액)</div><div class="navlink" data-sec="airwt"><span class="ic">⚖️</span>항공 중량 분석</div><div class="navlink" data-sec="exp"><span class="ic">🧾</span>출하경비 분석</div></div><div class="navgroup"><div class="gl">검색 · 상세</div><div class="navlink" data-sec="items"><span class="ic">🔍</span>품목 검색</div><div class="navlink" data-sec="makers"><span class="ic">🏢</span>메이커·거래처</div></div><div class="navgroup"><div class="gl">확장 분석 · 신규</div><div class="navlink" data-sec="entity"><span class="ic">🌏</span>법인별 통관</div><div class="navlink" data-sec="season"><span class="ic">📅</span>월별 시즌성</div><div class="navlink" data-sec="vendor"><span class="ic">💱</span>거래처·실효환율</div></div><div class="navgroup"><div class="gl">종합</div><div class="navlink" data-sec="insight"><span class="ic">📌</span>인사이트·제언</div></div></aside>
+  <aside class="side" id="side"><div class="brand"><div class="t">대아홀딩스 수입물류</div><div class="s">선박·항공·통관 분석 포털</div><div class="v">📊 v2.0 · 2025.07~2026.07</div></div><div class="navgroup"><div class="gl">요약</div><div class="navlink" data-sec="ov"><span class="ic">🏠</span>개요</div></div><div class="navgroup"><div class="gl">물동량 추이 · 주간</div><div class="navlink" data-sec="ship"><span class="ic">🚢</span>선박 추이</div><div class="navlink" data-sec="air"><span class="ic">✈️</span>항공 추이</div><div class="navlink" data-sec="fac"><span class="ic">🏭</span>공장별 분석</div></div><div class="navgroup"><div class="gl">통관 · 비용 · 월간</div><div class="navlink" data-sec="cust"><span class="ic">💰</span>통관 실적(금액)</div><div class="navlink" data-sec="airwt"><span class="ic">⚖️</span>항공 중량 분석</div><div class="navlink" data-sec="exp"><span class="ic">🧾</span>출하경비 분석</div></div><div class="navgroup"><div class="gl">검색 · 상세</div><div class="navlink" data-sec="items"><span class="ic">🔍</span>품목 검색</div><div class="navlink" data-sec="makers"><span class="ic">🏢</span>메이커·거래처</div></div><div class="navgroup"><div class="gl">확장 분석 · 신규</div><div class="navlink" data-sec="entity"><span class="ic">🌏</span>법인별 통관</div><div class="navlink" data-sec="season"><span class="ic">📅</span>월별 시즌성</div><div class="navlink" data-sec="vendor"><span class="ic">💱</span>거래처·실효환율</div></div><div class="navgroup"><div class="gl">심화 분석 · 통관원장</div><div class="navlink" data-sec="abc"><span class="ic">📈</span>파레토·ABC</div><div class="navlink" data-sec="switch"><span class="ic">🔄</span>항공→선박 전환</div><div class="navlink" data-sec="fx"><span class="ic">📉</span>환율 추이</div></div><div class="navgroup"><div class="gl">종합</div><div class="navlink" data-sec="insight"><span class="ic">📌</span>인사이트·제언</div></div></aside>
   <div class="backdrop" id="bd"></div>
   <main class="main">
     <div class="topbar">
@@ -298,6 +298,41 @@ a{color:inherit;text-decoration:none}
   <div class="legend">※ 실효환율 = 원화금액 합 ÷ USD금액 합. 단위단가 = USD금액 합 ÷ 수량 합. 전체 평균 실효환율을 기준선으로 표시합니다.</div>
 </section>
 
+<!-- 파레토·ABC (통관원장) -->
+<section class="sect" id="s-abc">
+  <div class="h1"><span class="ic">📈</span>파레토 · ABC 분석</div>
+  <p class="lede">통관 상세 원장(<b id="abcPeriod"></b>, <b id="abcRows"></b>건)을 품목코드(S###) 단위로 집계해 <b>금액 집중도</b>를 분석합니다. 소수의 <b>A등급</b> 품목이 금액 대부분을 차지하는지 확인하고, 중점 관리 대상을 선별합니다.</p>
+  <div class="callout info"><div class="ct">🆕 원장 기반</div>이 섹션·「항공→선박 전환」·「환율 추이」는 새로 제공된 <b>통관 상세 원장(건별)</b>으로 작성했습니다. 품목코드가 기존 포털과 <b>동일 체계(S###-######)</b>라 상호 정합적입니다. 자료는 .xls 최대 행수(65,535건)까지 포함됩니다.</div>
+  <div class="kgrid" id="abcKpi"></div>
+  <div class="chartbox"><h4>파레토 곡선 — 품목 누적 비율(%) vs 금액 누적 비율(%)</h4><canvas id="cABC" height="95"></canvas></div>
+  <div class="h2">ABC 등급 요약</div><div class="h2s">A=상위 80% 금액 · B=80~95% · C=95~100%</div>
+  <div id="abcTable"></div>
+  <div class="h2">금액 상위 품목 (Top 20)</div><div class="h2s">등급 태그 포함</div>
+  <div id="abcItemTable"></div>
+  <div class="callout tip"><div class="ct">💡 관리 제언</div><ul id="abcNotes"></ul></div>
+</section>
+
+<!-- 항공→선박 전환 시뮬레이션 -->
+<section class="sect" id="s-switch">
+  <div class="h1"><span class="ic">🔄</span>항공 → 선박 전환 시뮬레이션</div>
+  <p class="lede">항공운임은 <b>중량 기준</b>이므로, <b>중량당 금액이 낮은(저부가·고중량)</b> 품목을 항공으로 보내면 비용 효율이 나쁩니다. 원장의 항공 건을 중량당 단가($/kg)로 평가해 <b>선박 전환 후보</b>를 선별하고 절감액을 추정합니다.</p>
+  <div class="kgrid" id="swKpi"></div>
+  <div class="callout warn"><div class="ct">⚠️ 방법론 · 가정</div><ul id="swMethod"></ul></div>
+  <div class="chartbox"><h4>전환 후보 상위 15 — 항공 중량(kg) 및 예상 절감액</h4><canvas id="cSw" height="110"></canvas></div>
+  <div class="h2">선박 전환 후보 품목</div><div class="h2s">중량당 단가($/kg)가 낮고 항공 중량이 큰 순 · 절감액은 가정 기반 추정치</div>
+  <div id="swTable"></div>
+  <div class="callout tip"><div class="ct">🎯 제언</div><ul id="swNotes"></ul></div>
+</section>
+
+<!-- 환율 추이 -->
+<section class="sect" id="s-fx">
+  <div class="h1"><span class="ic">📉</span>환율(실환율) 추이</div>
+  <p class="lede">원장의 건별 <b>환율</b>을 월별 <b>금액 가중 평균</b>으로 집계한 실효환율 추이입니다. 환율이 안정적이라면 원가 변동은 <b>물량·단가</b>에서 비롯되고, 급변 구간은 원가에 직접 영향을 줍니다.</p>
+  <div class="kgrid" id="fxKpi"></div>
+  <div class="chartbox"><h4>월별 실효환율 (원/USD, 금액 가중)</h4><canvas id="cFx" height="90"></canvas></div>
+  <div class="callout info"><div class="ct">📊 관찰</div><ul id="fxNotes"></ul></div>
+</section>
+
 <!-- 인사이트 -->
 <section class="sect" id="s-insight">
   <div class="h1"><span class="ic">📌</span>인사이트 · 제언</div>
@@ -332,7 +367,7 @@ function show(sec){
   document.querySelectorAll('.sect').forEach(s=>s.classList.remove('on'));
   document.getElementById('s-'+sec).classList.add('on');
   document.querySelectorAll('.navlink').forEach(n=>n.classList.toggle('on',n.dataset.sec===sec));
-  const lbl={ov:'개요',ship:'선박 추이',air:'항공 추이',fac:'공장별 분석',cust:'통관 실적',airwt:'항공 중량',exp:'출하경비',items:'품목 검색',makers:'메이커·거래처',entity:'법인별 통관',season:'월별 시즌성',vendor:'거래처·실효환율',insight:'인사이트'}[sec];
+  const lbl={ov:'개요',ship:'선박 추이',air:'항공 추이',fac:'공장별 분석',cust:'통관 실적',airwt:'항공 중량',exp:'출하경비',items:'품목 검색',makers:'메이커·거래처',entity:'법인별 통관',season:'월별 시즌성',vendor:'거래처·실효환율',abc:'파레토·ABC',switch:'항공→선박 전환',fx:'환율 추이',insight:'인사이트'}[sec];
   document.getElementById('crumb').innerHTML='분석 포털 · <b>'+lbl+'</b>';
   if(!rendered[sec]){ (draw[sec]||(()=>{}))(); rendered[sec]=true; }
   window.scrollTo(0,0);
@@ -614,6 +649,82 @@ draw.vendor=function(){
   v.forEach((x,i)=>{ const flag=x.rate>avg?' style="color:#c0392b;font-weight:800"':'';
     rows+=`<tr><td class="rk">${i+1}</td><td class="nm">${x.ven}</td><td class="num">${N(x.cnt)}</td><td class="num tot">${usd(x.usd)}</td><td class="num">${N(x.krw/1e8)}억</td><td class="num"${flag}>${N(x.rate)}</td><td class="num">$${x.unit.toFixed(4)}</td></tr>`; });
   document.getElementById('veTable').innerHTML=`<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>거래처(매입처)</th><th class="num">건수</th><th class="num">통관금액(USD)</th><th class="num">원화</th><th class="num">실효환율</th><th class="num">단위단가($/개)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+};
+
+
+
+/* ==================== 심화 분석 (통관 상세 원장) ==================== */
+const Y = {"src_period":"2025.01 ~ 2026.07","n_rows":65535,"n_items":2122,"tot_usd":24135770,"tot_wt":2091687,"air_usd":2115046,"air_wt":144580,"sea_wt":1947106,"air_dpk_all":14.63,"air_wt_pct":6.9,"abc":{"A":{"n":347,"usd":19291779,"pct":79.9,"npct":16.4},"B":{"n":403,"usd":3635204,"pct":15.1,"npct":19.0},"C":{"n":1372,"usd":1208790,"pct":5.0,"npct":64.7}},"curve":[{"x":0.0,"y":1.68},{"x":2.0,"y":29.02},{"x":4.0,"y":42.64},{"x":6.0,"y":52.76},{"x":8.0,"y":60.5},{"x":9.9,"y":66.67},{"x":11.9,"y":71.63},{"x":13.9,"y":75.72},{"x":15.9,"y":79.19},{"x":17.9,"y":82.1},{"x":19.8,"y":84.58},{"x":21.8,"y":86.68},{"x":23.8,"y":88.48},{"x":25.8,"y":90.06},{"x":27.8,"y":91.43},{"x":29.7,"y":92.58},{"x":31.7,"y":93.56},{"x":33.7,"y":94.39},{"x":35.7,"y":95.1},{"x":37.7,"y":95.7},{"x":39.6,"y":96.2},{"x":41.6,"y":96.66},{"x":43.6,"y":97.06},{"x":45.6,"y":97.42},{"x":47.5,"y":97.73},{"x":49.5,"y":98.01},{"x":51.5,"y":98.25},{"x":53.5,"y":98.47},{"x":55.5,"y":98.66},{"x":57.4,"y":98.83},{"x":59.4,"y":98.98},{"x":61.4,"y":99.11},{"x":63.4,"y":99.22},{"x":65.4,"y":99.32},{"x":67.3,"y":99.41},{"x":69.3,"y":99.48},{"x":71.3,"y":99.55},{"x":73.3,"y":99.61},{"x":75.3,"y":99.67},{"x":77.2,"y":99.72},{"x":79.2,"y":99.76},{"x":81.2,"y":99.8},{"x":83.2,"y":99.83},{"x":85.2,"y":99.86},{"x":87.1,"y":99.89},{"x":89.1,"y":99.92},{"x":91.1,"y":99.95},{"x":93.1,"y":99.97},{"x":95.1,"y":99.98},{"x":97.0,"y":99.99},{"x":99.0,"y":100.0},{"x":100.0,"y":100.0}],"top_items":[{"code":"S150-502470","name":"PTL_HARNESS TAPE 19*20 BLK","cat":"TAPE","maker":"TAEYOUNG","usd":404363,"qty":36726000,"wt":91815,"cnt":153,"air_usd":0,"air_wt":0,"air_cnt":0,"facs":"F5","abc":"A"},{"code":"S510-500900","name":"MS-308-LG-DU (400mm) (6601FA3675U) (MEC)","cat":"SWITCH","maker":"MEC","usd":388931,"qty":546500,"wt":8332,"cnt":78,"air_usd":112697,"air_wt":2536,"air_cnt":23,"facs":"F2","abc":"A","air_dpk":44.44},{"code":"S150-500150","name":"AT TAPE WHT No.231(W=19*30m)","cat":"UL TAPE","maker":"DUCKSUNG","usd":364233,"qty":6378000,"wt":26341,"cnt":222,"air_usd":10982,"air_wt":793,"air_cnt":17,"facs":"F1/F2/F5","abc":"A","air_dpk":13.85},{"code":"S010-000810","name":"DIWF 0.5SQ BLU","cat":"WIRE","maker":"LS CABLE","usd":253943,"qty":2050210,"wt":32803,"cnt":101,"air_usd":5945,"air_wt":820,"air_cnt":6,"facs":"F2","abc":"A","air_dpk":7.25},{"code":"S510-500860","name":"MEG65559702","cat":"TERMINAL BLOCK","maker":"HAENGSUNG","usd":247023,"qty":460440,"wt":27626,"cnt":39,"air_usd":10933,"air_wt":1231,"air_cnt":6,"facs":"F2","abc":"A","air_dpk":8.88},{"code":"S010-006430","name":"UL1007 #24 BLU","cat":"WIRE","maker":"LS CABLE","usd":239982,"qty":6032900,"wt":23733,"cnt":139,"air_usd":4510,"air_wt":490,"air_cnt":7,"facs":"F2","abc":"A","air_dpk":9.2},{"code":"S030-300250","name":"YST-200-CRT","cat":"TERMINAL","maker":"YEONHO","usd":237824,"qty":108405000,"wt":12250,"cnt":229,"air_usd":5421,"air_wt":280,"air_cnt":12,"facs":"F1/F2/F5","abc":"A","air_dpk":19.36},{"code":"S150-502130","name":"HARNESS TAPE 19*20 BLK","cat":"TAPE","maker":"TAEYOUNG","usd":236971,"qty":22926000,"wt":57315,"cnt":151,"air_usd":3505,"air_wt":840,"air_cnt":6,"facs":"F1/F2","abc":"A","air_dpk":4.17},{"code":"S020-301250","name":"41802(2232111-3)","cat":"TERMINAL","maker":"AMP","usd":228678,"qty":16557000,"wt":21806,"cnt":121,"air_usd":13935,"air_wt":1324,"air_cnt":15,"facs":"F1/F2","abc":"A","air_dpk":10.52},{"code":"S510-500840","name":"MS-308-LG-DU (6601EA2001U) (L=130 MM)(MEC)","cat":"SWITCH","maker":"MEC","usd":215305,"qty":335000,"wt":4690,"cnt":110,"air_usd":80506,"air_wt":1757,"air_cnt":37,"facs":"F2","abc":"A","air_dpk":45.82},{"code":"S510-300090","name":"TT14.35*0.8","cat":"TERMINAL","maker":"HAENGSUNG","usd":202822,"qty":1373400,"wt":13075,"cnt":37,"air_usd":9295,"air_wt":600,"air_cnt":4,"facs":"F2","abc":"A","air_dpk":15.49},{"code":"S510-500820","name":"MS-308-LG-DU (400mm) (6601FA3675N) (MEC)","cat":"SWITCH  발주불가","maker":"MEC","usd":198183,"qty":274763,"wt":4341,"cnt":41,"air_usd":16323,"air_wt":348,"air_cnt":4,"facs":"F2","abc":"A","air_dpk":46.91},{"code":"S010-005750","name":"UL1007 #24 WHT","cat":"WIRE","maker":"LS CABLE","usd":198000,"qty":4966620,"wt":19539,"cnt":136,"air_usd":5592,"air_wt":610,"air_cnt":10,"facs":"F2","abc":"A","air_dpk":9.17},{"code":"S060-300040","name":"ST710095-3","cat":"TERMINAL","maker":"KET","usd":175838,"qty":21829500,"wt":19647,"cnt":170,"air_usd":0,"air_wt":0,"air_cnt":0,"facs":"F1/F2/F5","abc":"A"},{"code":"S170-500410","name":"OR 31*15*20HB,SMR45                       ","cat":"F/CORE","maker":"SAMWHA","usd":164348,"qty":904400,"wt":32106,"cnt":57,"air_usd":811,"air_wt":156,"air_cnt":1,"facs":"F5","abc":"A","air_dpk":5.2},{"code":"S030-300310","name":"25045TP","cat":"TERMINAL","maker":"YEONHO","usd":160392,"qty":45265000,"wt":9551,"cnt":257,"air_usd":10960,"air_wt":655,"air_cnt":21,"facs":"F2/F5","abc":"A","air_dpk":16.73},{"code":"S040-300270","name":"35750-1010 (RING : 4.3mm)","cat":"TERMINAL","maker":"MOLEX","usd":149323,"qty":15981000,"wt":7847,"cnt":106,"air_usd":9810,"air_wt":516,"air_cnt":15,"facs":"F1/F2","abc":"A","air_dpk":19.01},{"code":"S060-300880","name":"ST710197-2","cat":"TERMINAL","maker":"KET","usd":147056,"qty":12192000,"wt":7315,"cnt":88,"air_usd":21617,"air_wt":1087,"air_cnt":21,"facs":"F1/F2/SAMDO","abc":"A","air_dpk":19.89},{"code":"S010-001510","name":"UL1015 #18 BLACK","cat":"WIRE","maker":"LS CABLE","usd":146010,"qty":1056520,"wt":16626,"cnt":129,"air_usd":6488,"air_wt":816,"air_cnt":14,"facs":"F2","abc":"A","air_dpk":7.95},{"code":"S010-004410","name":"UL1015 #18 WHT","cat":"WIRE","maker":"LS CABLE","usd":142610,"qty":1033340,"wt":16262,"cnt":128,"air_usd":6265,"air_wt":787,"air_cnt":13,"facs":"F2","abc":"A","air_dpk":7.96}],"AIR_PER_KG":181,"SEA_PER_KG":55,"PREM":126,"med_dpk":14.27,"cand_n":353,"cand_wt":101474,"cand_save":12785724,"top_cands":[{"name":"TR 36*23*15 G5A C/T RED(M)","cat":"F/CORE","maker":"FEELUX","air_wt":3509,"air_usd":18198,"air_cnt":25,"dpk":5.19,"save":442134},{"name":"TR25*15*12 G5B C/T BLUE(M)","cat":"F/CORE","maker":"FEELUX","air_wt":3398,"air_usd":20754,"air_cnt":15,"dpk":6.11,"save":428148},{"name":"RING 28-16.0-13.0 (GRY COATING)(M)","cat":"F/CORE","maker":"FEELUX","air_wt":2519,"air_usd":11049,"air_cnt":26,"dpk":4.39,"save":317394},{"name":"TR 36*23*15 G10A C/T BLUE (M)","cat":"F/CORE","maker":"FEELUX","air_wt":2059,"air_usd":11494,"air_cnt":21,"dpk":5.58,"save":259434},{"name":"RING 18 C/T GRAY","cat":"F/CORE","maker":"FEELUX","air_wt":1957,"air_usd":17240,"air_cnt":28,"dpk":8.81,"save":246582},{"name":"OP-18A(M)","cat":"F/CORE","maker":"FEELUX","air_wt":1880,"air_usd":6134,"air_cnt":21,"dpk":3.26,"save":236880},{"name":"VIT-300 #0 BLACK","cat":"TUBE","maker":"DAEMYUNG","air_wt":1754,"air_usd":4849,"air_cnt":31,"dpk":2.76,"save":221004},{"name":"RING 23.5 C/T GRAY(M)","cat":"F/CORE","maker":"FEELUX","air_wt":1661,"air_usd":9523,"air_cnt":35,"dpk":5.73,"save":209286},{"name":"EP-2813C (R28×15.4×13 K150, Ni)","cat":"F/CORE","maker":"E-TECH","air_wt":1484,"air_usd":5754,"air_cnt":8,"dpk":3.88,"save":186984},{"name":"41802(2232111-3)","cat":"TERMINAL","maker":"AMP","air_wt":1324,"air_usd":13935,"air_cnt":15,"dpk":10.52,"save":166824},{"name":"MEG65559702","cat":"TERMINAL BLOCK","maker":"HAENGSUNG","air_wt":1231,"air_usd":10933,"air_cnt":6,"dpk":8.88,"save":155106},{"name":"UL1617 #20(20/0.180A)-HE BLU","cat":"WIRE","maker":"LS CABLE","air_wt":1178,"air_usd":11071,"air_cnt":24,"dpk":9.4,"save":148428},{"name":"DIWF 0.5SQ GRY","cat":"WIRE","maker":"LS CABLE","air_wt":1152,"air_usd":8531,"air_cnt":20,"dpk":7.41,"save":145152},{"name":"MG610439P(VO)","cat":"HOUSING","maker":"KET","air_wt":1144,"air_usd":9854,"air_cnt":49,"dpk":8.61,"save":144144},{"name":"UL1015 #22 BLU","cat":"WIRE","maker":"LS CABLE","air_wt":1116,"air_usd":7400,"air_cnt":21,"dpk":6.63,"save":140616}],"fx":[{"m":"25.01","rate":1453.9},{"m":"25.02","rate":1446.5},{"m":"25.03","rate":1455.6},{"m":"25.04","rate":1432.2},{"m":"25.05","rate":1412.5},{"m":"25.06","rate":1363.1},{"m":"25.07","rate":1369.2},{"m":"25.08","rate":1387.1},{"m":"25.09","rate":1394.4},{"m":"25.10","rate":1404.2},{"m":"25.11","rate":1455.9},{"m":"25.12","rate":1469.6},{"m":"26.01","rate":1448.6},{"m":"26.02","rate":1448.3},{"m":"26.03","rate":1485.8},{"m":"26.04","rate":1488.4},{"m":"26.05","rate":1481.6},{"m":"26.06","rate":1529.3},{"m":"26.07","rate":1333.4,"partial":true}],"eff_rate":1436.5,"fx_min":1363.1,"fx_max":1529.3,"fx_min_m":"25.06","fx_max_m":"26.06","fx_band":11.6,"fx_partial_m":"26.07"};
+
+draw.abc=function(){
+  const a=Y.abc;
+  document.getElementById('abcPeriod').textContent=Y.src_period;
+  document.getElementById('abcRows').textContent=N(Y.n_rows);
+  document.getElementById('abcKpi').innerHTML=
+    kpi('고유 품목',N(Y.n_items),'종','원장 집계')+
+    kpi('A등급 품목',N(a.A.n),'종','전체의 '+a.A.npct+'%')+
+    kpi('A등급 금액 비중',a.A.pct,'%','핵심 관리 대상','g')+
+    kpi('통관금액 계',usd(Y.tot_usd),'',Y.src_period);
+  if(charts.cABC)charts.cABC.destroy();
+  charts.cABC=new Chart(cABC,{type:'line',data:{labels:Y.curve.map(p=>p.x),datasets:[
+    {label:'금액 누적 비율',data:Y.curve.map(p=>({x:p.x,y:p.y})),borderColor:'#2E5C8A',backgroundColor:'rgba(46,92,138,.08)',fill:true,tension:.25,pointRadius:0,borderWidth:2.5},
+    {label:'80% 기준',data:[{x:0,y:80},{x:100,y:80}],borderColor:'#c0392b',borderDash:[5,4],pointRadius:0,borderWidth:1.3,fill:false}]},
+    options:{parsing:false,plugins:{legend:{position:'top',labels:{boxWidth:11}},tooltip:{callbacks:{label:x=>'품목 '+x.parsed.x+'% → 금액 '+x.parsed.y+'%'}}},
+      scales:{x:{type:'linear',min:0,max:100,grid:{color:'#eef2f7'},title:{display:true,text:'품목 누적 비율(%)',font:{size:10}},ticks:{callback:v=>v+'%'}},
+              y:{min:0,max:100,grid:{color:'#eef2f7'},title:{display:true,text:'금액 누적 비율(%)',font:{size:10}},ticks:{callback:v=>v+'%'}}}}});
+  const rowc=g=>`<tr><td class="nm"><span class="tag ${g==='A'?'air':g==='B'?'sea':'mix'}">${g}등급</span></td><td class="num tot">${N(a[g].n)}</td><td class="num">${a[g].npct}%</td><td class="num">${usd(a[g].usd)}</td><td class="num">${a[g].pct}%</td></tr>`;
+  document.getElementById('abcTable').innerHTML=`<table class="tbl"><thead><tr><th>등급</th><th class="num">품목수</th><th class="num">품목 비중</th><th class="num">통관금액</th><th class="num">금액 비중</th></tr></thead><tbody>${rowc('A')+rowc('B')+rowc('C')}</tbody></table>`;
+  let rows='';
+  Y.top_items.forEach((x,i)=>{ rows+=`<tr><td class="rk">${i+1}</td><td class="nm" style="font-size:12px">${x.name}</td><td class="sub">${x.cat}</td><td class="sub">${x.maker}</td><td class="num tot">${usd(x.usd)}</td><td class="num">${N(x.qty)}</td><td class="num">${N(x.wt)}</td><td>${(x.facs||'').split('/').filter(Boolean).map(f=>`<span class="fac">${f}</span>`).join('')}</td><td><span class="tag ${x.abc==='A'?'air':x.abc==='B'?'sea':'mix'}">${x.abc}</span></td></tr>`; });
+  document.getElementById('abcItemTable').innerHTML=`<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>품목명</th><th>계정</th><th>메이커</th><th class="num">금액(USD)</th><th class="num">수량</th><th class="num">중량(kg)</th><th>공장</th><th>등급</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.getElementById('abcNotes').innerHTML=
+    '<li>상위 <b>'+a.A.npct+'%('+N(a.A.n)+'종)</b>가 통관금액의 <b class="hl">'+a.A.pct+'%</b>를 차지 — 전형적인 파레토 구조입니다. 이 A등급에 <b>단가 협상·수급 관리</b>를 집중하면 효과가 가장 큽니다.</li>'+
+    '<li>C등급 <b>'+N(a.C.n)+'종</b>은 금액 비중 <b>'+a.C.pct+'%</b>에 불과 — 발주 최소수량·표준화·통합발주로 <b>관리 비용</b>을 줄일 여지가 큽니다.</li>'+
+    '<li>A등급 위주로 <b>이중 소싱·재고 안전선</b>을 설계하면 공급 리스크 대비 효율이 높습니다.</li>';
+};
+
+draw.switch=function(){
+  document.getElementById('swKpi').innerHTML=
+    kpi('항공 중량 비율',Y.air_wt_pct,'%','전체 통관중량 대비','air')+
+    kpi('항공 중량당 단가',N(Y.air_dpk_all),'$/kg','낮을수록 전환 유리')+
+    kpi('선박 전환 후보',N(Y.cand_n),'종','저$/kg·고중량')+
+    kpi('예상 연간 절감',won(Y.cand_save),'','후보 전량 전환 시(추정)','g');
+  document.getElementById('swMethod').innerHTML=
+    '<li>후보 정의: 항공 건 중 <b>중량당 단가 &lt; 중앙값('+N(Y.med_dpk)+'$/kg)</b> 이면서 <b>항공 중량 ≥ 20kg</b>인 품목.</li>'+
+    '<li>절감 가정: 항공 출하경비 <b>'+won(Y.AIR_PER_KG)+'/kg</b> vs 선박 <b>'+won(Y.SEA_PER_KG)+'/kg</b> → 전환 시 <b>'+won(Y.PREM)+'/kg</b> 절감(기존 포털 출하경비·중량에서 도출한 <b>예시 단가</b>). 실제 요율 적용 시 값은 달라집니다.</li>'+
+    '<li>긴급 납기·라인 정지 리스크가 있는 품목은 후보에서 실무 검토로 제외해야 합니다.</li>';
+  const c=Y.top_cands;
+  if(charts.cSw)charts.cSw.destroy();
+  charts.cSw=new Chart(cSw,{type:'bar',data:{labels:c.map(x=>x.name.length>16?x.name.slice(0,16)+'…':x.name),datasets:[
+    {label:'항공 중량(kg)',data:c.map(x=>x.air_wt),backgroundColor:'#c0392b',borderRadius:3,yAxisID:'y'},
+    {label:'예상 절감액(원)',data:c.map(x=>x.save),backgroundColor:'#5a9367',borderRadius:3,yAxisID:'y1'}]},
+    options:{plugins:{legend:{position:'top',labels:{boxWidth:11}},tooltip:{callbacks:{title:i=>c[i[0].dataIndex].name}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:8.5},maxRotation:60,minRotation:45}},
+        y:{position:'left',grid:{color:'#eef2f7'},ticks:{callback:v=>N(v)+'kg'}},
+        y1:{position:'right',grid:{display:false},ticks:{callback:v=>(v/1e4).toFixed(0)+'만'}}}}});
+  let rows='';
+  c.forEach((x,i)=>{ rows+=`<tr><td class="rk">${i+1}</td><td class="nm" style="font-size:12px">${x.name}</td><td class="sub">${x.cat}</td><td class="sub">${x.maker}</td><td class="num tot">${N(x.air_wt)}</td><td class="num">${usd(x.air_usd)}</td><td class="num">$${x.dpk}</td><td class="num">${x.air_cnt}</td><td class="num" style="color:#5a9367;font-weight:800">${won(x.save)}</td></tr>`; });
+  document.getElementById('swTable').innerHTML=`<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>품목명</th><th>계정</th><th>메이커</th><th class="num">항공중량(kg)</th><th class="num">항공금액</th><th class="num">$/kg</th><th class="num">건수</th><th class="num">예상절감</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.getElementById('swNotes').innerHTML=
+    '<li>후보 <b>'+N(Y.cand_n)+'종·'+N(Y.cand_wt)+'kg</b>을 선박으로 전환하면 최대 <b class="hl">'+won(Y.cand_save)+'/년</b> 수준의 출하경비 절감이 가능합니다(추정).</li>'+
+    '<li>1순위는 <b>'+c[0].maker+'</b>의 <b>'+c[0].cat+'</b>류(고무 코어·튜브 등) — 저단가·고부피로 항공 효율이 특히 나쁩니다.</li>'+
+    '<li>반대로 <b>$/kg가 높은</b> 소형 고단가 부품은 항공 유지가 합리적이므로 전환 대상에서 제외합니다.</li>';
+};
+
+draw.fx=function(){
+  const f=Y.fx;
+  document.getElementById('fxKpi').innerHTML=
+    kpi('전체 실효환율',N(Y.eff_rate),'원/USD','금액 가중 평균 · '+Y.src_period)+
+    kpi('최고',N(Y.fx_max),'원/USD',Y.fx_max_m,'air')+
+    kpi('최저',N(Y.fx_min),'원/USD',Y.fx_min_m,'g')+
+    kpi('변동폭',Y.fx_band,'%','완전월 기준 · '+N(Y.fx_max-Y.fx_min)+'원');
+  const cols=f.map(x=>x.partial?'#a9c6e2':'#2E5C8A');
+  C('cFx',{type:'line',data:{labels:f.map(x=>x.m+(x.partial?'*':'')),datasets:[{label:'실효환율',data:f.map(x=>x.rate),borderColor:'#2E5C8A',backgroundColor:'rgba(46,92,138,.08)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:cols,borderWidth:2.5}]},
+    options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>N(x.parsed.y)+' 원/USD'+(f[x.dataIndex].partial?' (부분월)':'')}}},scales:{y:{grid:{color:'#eef2f7'},ticks:{callback:v=>N(v)}},x:{grid:{display:false}}}}});
+  document.getElementById('fxNotes').innerHTML=
+    '<li>완전월 기준 실효환율은 <b>'+N(Y.fx_min)+'('+Y.fx_min_m+')~'+N(Y.fx_max)+'('+Y.fx_max_m+')원</b>, 변동폭 <b>'+Y.fx_band+'%</b>로 '+(Y.fx_band<8?'비교적 안정적':'무시할 수 없는 수준')+'입니다.</li>'+
+    '<li>최근 상승 추세(26년 상반기 '+N(Y.fx_max)+'원대)는 원화 원가를 밀어올리는 요인 — 고금액 A등급 품목의 <b>결제통화·환헤지</b> 조건을 점검할 가치가 있습니다.</li>'+
+    '<li>표시된 <b>'+Y.fx_partial_m+'*</b>는 부분월(월 초 일부)이라 통계에서 제외했습니다.</li>';
 };
 
 /* ---------- INSIGHT ---------- */
