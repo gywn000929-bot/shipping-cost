@@ -312,15 +312,16 @@ a{color:inherit;text-decoration:none}
   <div class="callout tip"><div class="ct">💡 관리 제언</div><ul id="abcNotes"></ul></div>
 </section>
 
-<!-- 긴급 항공 전환 분석 -->
+<!-- 긴급 항공 전환 분석 (선박/에어 요청 리스트 실측) -->
 <section class="sect" id="s-switch">
   <div class="h1"><span class="ic">🔄</span>긴급 항공 전환 분석</div>
-  <p class="lede">항공운임의 대부분은 <b>능동적 모드 선택이 아니라</b>, 선박으로 발주됐으나 선적 일정을 맞추지 못해 <b class="hl">긴급 항공으로 전환</b>되며 발생한 비용으로 추정됩니다. <b>같은 수주번호가 선박·항공 양쪽에 나타나는 '분할 주문'</b>으로 이를 식별합니다. 따라서 핵심은 "모드 전환"이 아니라 <b>선박 출하 실행력(발주 리드타임·선적 부킹·안전재고)</b> 개선입니다.</p>
-  <div class="callout warn"><div class="ct">🔎 핵심 발견 — 항공 = 선박 실패의 결과</div><ul id="swKey"></ul></div>
+  <p class="lede">주간 <b>선박 요청 리스트('선박' 시트)</b>와 <b>에어 요청 리스트('Air' 시트)</b>를 대조한 <b>실측</b> 분석입니다. 항공은 능동적 모드 선택이 아니라, <b class="hl">선박으로 요청했으나 재고 부족·납기 미스로 항공으로 전환</b>된 결과임이 확인됩니다. 따라서 핵심은 "모드 전환"이 아니라 <b>선박 출하 실행력(발주 리드타임·선적 부킹·안전재고)</b> 개선입니다.</p>
+  <div class="callout warn"><div class="ct">🔎 핵심 발견 — 에어 요청 = 선박 계획의 실패분</div><ul id="swKey"></ul></div>
   <div class="kgrid" id="swKpi"></div>
-  <div class="chartbox"><h4>월별 긴급 항공 중량 추이 (분할주문 항공분 vs 기타 항공)</h4><canvas id="cSwMon" height="95"></canvas></div>
-  <div class="chartbox"><h4>긴급 항공 상위 메이커 — 항공 중량(kg)</h4><canvas id="cSwMk" height="100"></canvas></div>
-  <div class="h2">긴급 항공 전환 추정 상위 품목</div><div class="h2s">분할주문의 항공분 중량 순 · 선박 베이스라인과 항공율을 함께 표시</div>
+  <div class="chartbox"><h4>주차별 에어 요청수량 & 선박계획 중복분 (2026.03~07)</h4><canvas id="cSwMon" height="95"></canvas></div>
+  <div class="chartbox"><h4>주차별 선박계획 중복률 (%) — 에어 요청 중 선박 계획에도 있던 비율</h4><canvas id="cSwOv" height="80"></canvas></div>
+  <div class="chartbox"><h4>긴급 항공 상위 메이커 — 추정 중량(kg)</h4><canvas id="cSwMk" height="100"></canvas></div>
+  <div class="h2">긴급 항공 전환 상위 품목</div><div class="h2s">에어 요청 품목의 추정 중량 순 · '선박계획 포함' = 해당 주 선박 시트에도 존재</div>
   <div id="swTable"></div>
   <div class="callout info"><div class="ct">📐 방법론 · 주의</div><ul id="swMethod"></ul></div>
   <div class="callout tip"><div class="ct">🎯 제언 — 근본원인은 선박 실행력</div><ul id="swNotes"></ul></div>
@@ -686,42 +687,44 @@ draw.abc=function(){
 };
 
 const Z = {"n_ord":1845,"split":948,"sea_only":717,"air_only":180,"split_pct":51.4,"tot_air_wt":144580,"tot_air_usd":2115046,"ea_wt":142385,"ea_usd":2068574,"ea_wt_pct":98.5,"ea_usd_pct":97.8,"PREM":126,"avoid":17940469,"AIR_PER_KG":181,"SEA_PER_KG":55,"top_items":[{"name":"TR 36*23*15 G5A C/T RED(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":3509,"sea_wt":9442,"ratio":27.1,"usd":18198,"cnt":25},{"name":"TR25*15*12 G5B C/T BLUE(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":3398,"sea_wt":11610,"ratio":22.6,"usd":20754,"cnt":15},{"name":"MS-308-LG-DU (400mm) (6601FA3675U) (MEC)","cat":"SWITCH","mk":"MEC","ea_wt":2536,"sea_wt":5796,"ratio":30.4,"usd":112697,"cnt":23},{"name":"RING 28-16.0-13.0 (GRY COATING)(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":2519,"sea_wt":7134,"ratio":26.1,"usd":11049,"cnt":26},{"name":"TR 36*23*15 G10A C/T BLUE (M)","cat":"F/CORE","mk":"FEELUX","ea_wt":2059,"sea_wt":18881,"ratio":9.8,"usd":11494,"cnt":21},{"name":"RING 18 C/T GRAY","cat":"F/CORE","mk":"FEELUX","ea_wt":1957,"sea_wt":13454,"ratio":12.7,"usd":17240,"cnt":28},{"name":"OP-18A(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":1880,"sea_wt":15581,"ratio":10.8,"usd":6134,"cnt":21},{"name":"MS-308-LG-DU (6601EA2001U) (L=130 MM)(ME","cat":"SWITCH","mk":"MEC","ea_wt":1757,"sea_wt":2933,"ratio":37.5,"usd":80506,"cnt":37},{"name":"VIT-300 #0 BLACK","cat":"TUBE","mk":"DAEMYUNG","ea_wt":1729,"sea_wt":11120,"ratio":13.5,"usd":4781,"cnt":30},{"name":"RING 23.5 C/T GRAY(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":1661,"sea_wt":2127,"ratio":43.8,"usd":9523,"cnt":35},{"name":"EP-2813C (R28×15.4×13 K150, Ni)","cat":"F/CORE","mk":"E-TECH","ea_wt":1484,"sea_wt":15287,"ratio":8.8,"usd":5754,"cnt":8},{"name":"41802(2232111-3)","cat":"TERMINAL","mk":"AMP","ea_wt":1324,"sea_wt":20482,"ratio":6.1,"usd":13935,"cnt":15},{"name":"MEG65559702","cat":"TERMINAL BLOCK","mk":"HAENGSUNG","ea_wt":1231,"sea_wt":26395,"ratio":4.5,"usd":10933,"cnt":6},{"name":"UL1617 #20(20/0.180A)-HE BLU","cat":"WIRE","mk":"LS CABLE","ea_wt":1159,"sea_wt":6365,"ratio":15.4,"usd":10899,"cnt":23},{"name":"DIWF 0.5SQ GRY","cat":"WIRE","mk":"LS CABLE","ea_wt":1152,"sea_wt":1464,"ratio":44.0,"usd":8531,"cnt":20}],"top_mk":[{"mk":"KET","wt":24209,"usd":375988,"cnt":1351},{"mk":"LS CABLE","wt":23634,"usd":194232,"cnt":766},{"mk":"FEELUX","wt":23143,"usd":129928,"cnt":359},{"mk":"YEONHO","wt":12309,"usd":304948,"cnt":2621},{"mk":"DAEMYUNG","wt":11443,"usd":34205,"cnt":413},{"mk":"AMP","wt":8047,"usd":171082,"cnt":979},{"mk":"MOLEX","wt":6367,"usd":97995,"cnt":357},{"mk":"MEC","wt":5340,"usd":244296,"cnt":78},{"mk":"KYUNG SHIN","wt":3999,"usd":51712,"cnt":241},{"mk":"DAEIL CST","wt":3910,"usd":92096,"cnt":573}],"mon":[{"m":"25.01","ea":8897,"oth":287},{"m":"25.02","ea":13327,"oth":117},{"m":"25.03","ea":11796,"oth":205},{"m":"25.04","ea":7271,"oth":150},{"m":"25.05","ea":7659,"oth":130},{"m":"25.06","ea":6357,"oth":66},{"m":"25.07","ea":7317,"oth":124},{"m":"25.08","ea":7214,"oth":151},{"m":"25.09","ea":8575,"oth":108},{"m":"25.10","ea":9553,"oth":93},{"m":"25.11","ea":5653,"oth":104},{"m":"25.12","ea":20334,"oth":418},{"m":"26.01","ea":13457,"oth":105},{"m":"26.02","ea":4595,"oth":9},{"m":"26.03","ea":3135,"oth":29},{"m":"26.04","ea":1881,"oth":9},{"m":"26.05","ea":2088,"oth":83},{"m":"26.06","ea":1813,"oth":8},{"m":"26.07","ea":1463,"oth":1}],"peak_m":"25.12","peak_v":20334};
+const W = {"weeks":[{"label":"3/20","air_it":76,"ov_it":51,"air_q":1485550,"ov_q":1287050,"ov_pct":86.6,"wt":813},{"label":"3/27","air_it":66,"ov_it":56,"air_q":1482858,"ov_q":1445758,"ov_pct":97.5,"wt":1058},{"label":"4/3","air_it":72,"ov_it":61,"air_q":1077205,"ov_q":974485,"ov_pct":90.5,"wt":710},{"label":"4/10","air_it":52,"ov_it":47,"air_q":957400,"ov_q":949400,"ov_pct":99.2,"wt":734},{"label":"4/17","air_it":34,"ov_it":27,"air_q":505010,"ov_q":482050,"ov_pct":95.5,"wt":255},{"label":"4/24","air_it":44,"ov_it":33,"air_q":557364,"ov_q":514114,"ov_pct":92.2,"wt":2223},{"label":"5/1","air_it":47,"ov_it":42,"air_q":527400,"ov_q":485700,"ov_pct":92.1,"wt":498},{"label":"5/15","air_it":64,"ov_it":45,"air_q":746600,"ov_q":698230,"ov_pct":93.5,"wt":903},{"label":"5/22","air_it":58,"ov_it":43,"air_q":1243235,"ov_q":1057805,"ov_pct":85.1,"wt":1052},{"label":"5/29","air_it":32,"ov_it":26,"air_q":399342,"ov_q":335242,"ov_pct":83.9,"wt":426},{"label":"6/5","air_it":32,"ov_it":24,"air_q":325960,"ov_q":236820,"ov_pct":72.7,"wt":629},{"label":"6/12","air_it":73,"ov_it":64,"air_q":885210,"ov_q":779670,"ov_pct":88.1,"wt":960},{"label":"6/19","air_it":63,"ov_it":58,"air_q":706212,"ov_q":673512,"ov_pct":95.4,"wt":930},{"label":"6/26","air_it":64,"ov_it":54,"air_q":420724,"ov_q":362220,"ov_pct":86.1,"wt":1402},{"label":"7/3","air_it":68,"ov_it":62,"air_q":843128,"ov_q":801288,"ov_pct":95.0,"wt":1264}],"top_mk":[{"mk":"AMP","q":1521050,"wt":2792,"usd":28781,"n":147},{"mk":"KET","q":3113250,"wt":1734,"usd":39360,"n":103},{"mk":"MEC","q":105500,"wt":1520,"usd":70305,"n":13},{"mk":"HAENGSUNG","q":44280,"wt":1385,"usd":13958,"n":7},{"mk":"LS CABLE","q":134520,"wt":1160,"usd":9811,"n":40},{"mk":"KYUNG SHIN","q":92535,"wt":1120,"usd":14327,"n":40},{"mk":"YEONHO","q":2358500,"wt":924,"usd":29693,"n":205},{"mk":"FEELUX","q":55280,"wt":669,"usd":3470,"n":11},{"mk":"DAEMYUNG","q":14300,"wt":381,"usd":1162,"n":13},{"mk":"MOLEX","q":132600,"wt":333,"usd":7001,"n":28}],"top_it":[{"code":"M020-001193","pn":"1376391-1 (AMP)","mk":"AMP","q":4000,"wt":1522,"usd":313,"in":false,"weeks":1},{"code":"M050-006490","pn":"MEG65559702 (HS)","mk":"HAENGSUNG","q":19080,"wt":1145,"usd":10236,"in":true,"weeks":4},{"code":"M050-004433","pn":"MS-308-LG-DU (6601EA2001U) (L=130 MM","mk":"MEC","q":68000,"wt":952,"usd":43704,"in":true,"weeks":6},{"code":"M050-004434","pn":"MS-308-LG-DU (6601FA3675U) (L=400mm)","mk":"MEC","q":35500,"wt":541,"usd":25264,"in":true,"weeks":6},{"code":"M010-006120","pn":"UL3271 #16 BLK (KYUNG SHIN)","mk":"KYUNG SHIN","q":19520,"wt":384,"usd":5184,"in":true,"weeks":2},{"code":"M050-006777","pn":"TR25*15*13 G10A (FEELUX)","mk":"FEELUX","q":14896,"wt":313,"usd":1524,"in":true,"weeks":4},{"code":"M010-007322","pn":"VSF 0.5SQ YEL (LS CABLE)","mk":"LS CABLE","q":28000,"wt":258,"usd":2061,"in":true,"weeks":4},{"code":"M010-006700","pn":"UL3398 #16 RED (KYUNG SHIN)","mk":"KYUNG SHIN","q":15250,"wt":250,"usd":3110,"in":true,"weeks":2},{"code":"M010-007232","pn":"VSF 0.5SQ RED (LS CABLE)","mk":"LS CABLE","q":27000,"wt":248,"usd":1986,"in":true,"weeks":4},{"code":"M030-003860","pn":"ST710197-2 (KET)","mk":"KET","q":408000,"wt":245,"usd":4921,"in":true,"weeks":3},{"code":"M030-000020","pn":"TT14.35*0.8 (HS)","mk":"HAENGSUNG","q":25200,"wt":240,"usd":3722,"in":true,"weeks":3},{"code":"M020-005601","pn":"34062-0023 (MOLEX)","mk":"MOLEX","q":34300,"wt":206,"usd":4730,"in":true,"weeks":6},{"code":"M020-004067","pn":"SMH200-05PR3 BLK (YEONHO)","mk":"YEONHO","q":543000,"wt":163,"usd":12613,"in":true,"weeks":6},{"code":"M020-000630","pn":"179938-1 (AMP)","mk":"AMP","q":90300,"wt":163,"usd":2409,"in":true,"weeks":13},{"code":"M020-007869","pn":"MG625434L WHT (KET)","mk":"KET","q":22250,"wt":154,"usd":1227,"in":true,"weeks":1}],"fac":[{"fac":"F2","q":7657920,"wt":7857,"n":493},{"fac":"F1","q":1084002,"wt":3753,"n":148},{"fac":"F5","q":3421276,"wt":2247,"n":204}],"n_weeks":15,"period":"2026.03~07 (15주)","tot_it":845.0,"tot_ov_it":693.0,"ov_it_pct":82.0,"tot_q":12163198,"tot_ov_q":11083344,"ov_q_pct":91.1,"tot_wt":13857,"tot_usd":263435,"avoid":1745972,"PREM":126,"match_pct":90.2,"peak":"3/20","peak_q":1485550};
 draw.switch=function(){
   document.getElementById('swKey').innerHTML=
-    '<li>전체 수주(주문)의 <b class="hl">'+Z.split_pct+'%('+N(Z.split)+'건)</b>가 <b>선박·항공에 동시 존재</b>하는 분할 주문 — 같은 주문의 일부만 항공으로 나갔습니다.</li>'+
-    '<li>이 분할 주문의 항공분이 <b>전체 항공 중량의 '+Z.ea_wt_pct+'%</b>('+N(Z.ea_wt)+'kg)·금액의 '+Z.ea_usd_pct+'%('+usd(Z.ea_usd)+')를 차지 — <b>사실상 대부분의 항공은 선박 대체가 아니라 선박 실패의 급송</b>입니다.</li>'+
-    '<li>순수 항공전용 주문은 '+N(Z.air_only)+'건뿐 — 진짜 "항공이 필수"인 물량은 소수입니다.</li>';
+    '<li>2026년 3~7월 <b>15개 주간 리스트</b>에서 에어로 요청된 품목의 <b class="hl">'+W.ov_q_pct+'%(수량)·'+W.ov_it_pct+'%(품목수)</b>가 <b>같은 주 선박 요청 리스트에도 존재</b>했습니다 — 즉 선박으로 계획했다가 항공으로 돌린 물량입니다.</li>'+
+    '<li>이는 통관원장 독립 분석(같은 수주가 선박·항공에 분할된 비율 '+Z.split_pct+'%, 항공의 '+Z.ea_wt_pct+'%)과도 <b>동일한 방향</b> — 항공은 대부분 <b>선박 실패의 결과</b>임이 두 자료에서 교차 확인됩니다.</li>'+
+    '<li>따라서 절감 레버리지는 항공 단가 협상이 아니라 <b>선박 이행률(정시 선적)</b>에 있습니다.</li>';
   document.getElementById('swKpi').innerHTML=
-    kpi('분할 주문 비율',Z.split_pct,'%',N(Z.split)+' / '+N(Z.n_ord)+'건','air')+
-    kpi('긴급 항공 추정 중량',N(Z.ea_wt),'kg','전체 항공의 '+Z.ea_wt_pct+'%','air')+
-    kpi('긴급 항공 추정 금액',usd(Z.ea_usd),'','화물가 기준')+
-    kpi('회피가능 절감',won(Z.avoid),'','선박 전량 이행 시(추정)','g');
-  const mon=Z.mon;
+    kpi('선박계획 중복률(수량)',W.ov_q_pct,'%','에어 요청 중 선박에도 있던 비율','air')+
+    kpi('선박계획 중복률(품목)',W.ov_it_pct,'%',N(W.tot_ov_it)+' / '+N(W.tot_it)+'건','air')+
+    kpi('에어 요청 누계',N(W.tot_q),'개','15주 합 · 추정중량 '+N(W.tot_wt)+'kg')+
+    kpi('회피가능 절감(추정)',won(W.avoid),'','15주·요청수량 기준','g');
+  const wk=W.weeks, lab=wk.map(x=>x.label);
   if(charts.cSwMon)charts.cSwMon.destroy();
-  charts.cSwMon=new Chart(cSwMon,{type:'bar',data:{labels:mon.map(x=>x.m),datasets:[
-    {label:'긴급 항공(분할주문)',data:mon.map(x=>x.ea),backgroundColor:'#c0392b',borderRadius:3},
-    {label:'기타 항공',data:mon.map(x=>x.oth),backgroundColor:'#a9c6e2',borderRadius:3}]},
-    options:{plugins:{legend:{position:'top',labels:{boxWidth:11}},tooltip:{callbacks:{label:x=>x.dataset.label+': '+N(x.parsed.y)+'kg'}}},
-      scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#eef2f7'},ticks:{callback:v=>(v/1000).toFixed(0)+'t'}}}}});
-  const mk=Z.top_mk;
+  charts.cSwMon=new Chart(cSwMon,{type:'bar',data:{labels:lab,datasets:[
+    {label:'선박계획 중복(전환)',data:wk.map(x=>x.ov_q),backgroundColor:'#c0392b',borderRadius:3,stack:'a'},
+    {label:'선박계획 외 에어',data:wk.map(x=>x.air_q-x.ov_q),backgroundColor:'#a9c6e2',borderRadius:3,stack:'a'}]},
+    options:{plugins:{legend:{position:'top',labels:{boxWidth:11}},tooltip:{callbacks:{label:x=>x.dataset.label+': '+N(x.parsed.y)}}},
+      scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#eef2f7'},ticks:{callback:v=>(v/1e6).toFixed(1)+'M'}}}}});
+  C('cSwOv',{type:'line',data:{labels:lab,datasets:[{label:'중복률',data:wk.map(x=>x.ov_pct),borderColor:'#c0392b',backgroundColor:'rgba(192,57,43,.08)',fill:true,tension:.3,pointRadius:3,borderWidth:2.5}]},
+    options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>x.parsed.y+'%'}}},scales:{y:{min:0,max:100,grid:{color:'#eef2f7'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+  const mk=W.top_mk;
   if(charts.cSwMk)charts.cSwMk.destroy();
   charts.cSwMk=new Chart(cSwMk,{type:'bar',data:{labels:mk.map(x=>x.mk),datasets:[{data:mk.map(x=>x.wt),backgroundColor:'#c0392b',borderRadius:4}]},
-    options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>N(x.parsed.x)+'kg · '+usd(mk[x.dataIndex].usd)}}},
-      scales:{x:{grid:{color:'#eef2f7'},ticks:{callback:v=>(v/1000).toFixed(0)+'t'}},y:{grid:{display:false}}}}});
+    options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>N(x.parsed.x)+'kg · '+x.dataIndex}}},
+      scales:{x:{grid:{color:'#eef2f7'},ticks:{callback:v=>N(v)+'kg'}},y:{grid:{display:false}}}}});
   let rows='';
-  Z.top_items.forEach((x,i)=>{ const base=x.sea_wt;
-    const bar=`<div class="mfbar" title="항공 ${x.ratio}%"><span style="width:${x.ratio}%;background:#c0392b"></span><span style="width:${100-x.ratio}%;background:#a9c6e2"></span></div>`;
-    rows+=`<tr><td class="rk">${i+1}</td><td class="nm" style="font-size:12px">${x.name}</td><td class="sub">${x.cat}</td><td class="sub">${x.mk}</td><td class="num tot" style="color:#c0392b">${N(x.ea_wt)}</td><td class="num">${N(base)}</td><td class="num">${x.ratio}%</td><td style="min-width:90px">${bar}</td><td class="num">${usd(x.usd)}</td><td class="num">${x.cnt}</td></tr>`; });
-  document.getElementById('swTable').innerHTML=`<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>품목명</th><th>계정</th><th>메이커</th><th class="air num">긴급항공(kg)</th><th class="num">선박(kg)</th><th class="num">항공율</th><th>항공/선박</th><th class="num">항공금액</th><th class="num">건수</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  W.top_it.forEach((x,i)=>{ rows+=`<tr><td class="rk">${i+1}</td><td class="nm" style="font-size:12px">${x.pn||x.code}</td><td class="sub">${x.mk}</td><td class="num">${N(x.q)}</td><td class="num tot">${N(x.wt)}</td><td class="num">${x.usd?usd(x.usd):'-'}</td><td>${x.in?'<span class="tag air">선박계획</span>':'<span class="tag mix">에어전용</span>'}</td><td class="num">${x.weeks}주</td></tr>`; });
+  document.getElementById('swTable').innerHTML=`<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>품목명</th><th>메이커</th><th class="num">에어요청수량</th><th class="num">추정중량(kg)</th><th class="num">추정금액</th><th>구분</th><th class="num">등장주차</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  const fac=W.fac.map(f=>`${f.fac} ${N(f.wt)}kg(${f.n}건)`).join(' · ');
   document.getElementById('swMethod').innerHTML=
-    '<li><b>식별 기준</b>: 동일 수주번호(발주 단위)가 선박·항공 통관에 <b>동시 존재</b>하면, 그 항공분을 "긴급 전환 추정"으로 분류했습니다.</li>'+
-    '<li><b>주의</b>: 강력한 추정 신호이나 100% 확증은 아닙니다. 일부는 애초에 소량 급송이 계획된 정상 항공일 수 있습니다.</li>'+
-    '<li><b>절감 가정</b>: 항공 '+won(Z.AIR_PER_KG)+'/kg vs 선박 '+won(Z.SEA_PER_KG)+'/kg → 전환 시 '+won(Z.PREM)+'/kg 절감(기존 포털 출하경비·중량에서 도출한 예시 단가).</li>';
+    '<li><b>식별 기준</b>: 각 주간 파일의 <b>\'Air\' 시트(에어 요청)</b> 품목 중, 같은 파일 <b>\'선박\' 시트</b>에도 있는 품목을 <b>선박계획 중복=긴급 전환</b>으로 분류(품목코드 M코드 기준).</li>'+
+    '<li><b>중량·금액</b>은 통관원장에서 해당 M코드의 <b>단위당 중량·단가</b>를 구해 요청수량에 곱한 <b>추정치</b>입니다(원장 매칭률 '+W.match_pct+'%). 절감 가정: 항공-선박 프리미엄 '+won(W.PREM)+'/kg.</li>'+
+    '<li>공장별 추정중량: '+fac+'. 범위는 <b>2026.03~07(15주)</b>·요청수량 기준이라, 전체 기간 통관 실적과는 규모가 다릅니다.</li>';
   document.getElementById('swNotes').innerHTML=
-    '<li>긴급 항공은 <b>'+Z.peak_m+'월('+N(Z.peak_v)+'kg)</b>에 정점 — 연말·연초 선적 성수기/스케줄 혼잡과 겹칩니다. <b>성수기 선(先)선적·조기 발주</b>가 1순위 대책입니다.</li>'+
-    '<li>메이커 <b>'+Z.top_mk[0].mk+'·'+Z.top_mk[1].mk+'·'+Z.top_mk[2].mk+'</b>에 긴급 항공이 집중 — 해당 공급사 <b>발주 리드타임·선박 부킹</b>을 집중 점검하세요.</li>'+
-    '<li>품목별 <b>항공율</b>이 높을수록 선박 이행 실패가 잦다는 뜻 — 상위 품목에 <b>안전재고</b>를 두면 급송 자체를 줄일 수 있습니다.</li>'+
-    '<li>이행률을 개선해 긴급 항공을 절반만 줄여도 연 <b class="hl">'+won(Math.round(Z.avoid/2))+'</b> 수준의 출하경비 절감이 가능합니다(추정).</li>';
+    '<li>에어 요청의 대부분이 <b>선박 계획 품목</b>이므로, 대책은 <b>발주 리드타임 조기화·선적 부킹 확보·안전재고</b>로 <b>선박 정시 이행률</b>을 올리는 것입니다.</li>'+
+    '<li>추정 중량 상위 메이커 <b>'+W.top_mk[0].mk+'·'+W.top_mk[1].mk+'·'+W.top_mk[2].mk+'</b>, 공장 <b>'+W.fac[0].fac+'</b>에 긴급 항공이 집중 — 우선 관리 대상입니다.</li>'+
+    '<li>중복률이 높은 주(<b>'+W.weeks.reduce((a,b)=>b.ov_pct>a.ov_pct?b:a).label+'주 '+W.weeks.reduce((a,b)=>b.ov_pct>a.ov_pct?b:a).ov_pct+'%</b>)일수록 선박 계획이 그대로 항공으로 밀린 것 — 해당 주 선적 실패 원인(부킹·통관·생산지연)을 되짚어볼 필요가 있습니다.</li>'+
+    '<li>여러 주에 반복 등장하는 품목(등장주차 多)은 <b>만성적 선박 실패</b> 신호 — 이 품목들에 안전재고를 두면 급송을 구조적으로 줄일 수 있습니다.</li>';
 };
 draw.fx=function(){
   const f=Y.fx;
@@ -760,7 +763,7 @@ draw.insight=function(){
     '<li><b>주간 물동량</b>(선박·항공·공장별 추이)만 <b>2026년 3~7월</b>분이라 2025년이 없습니다. 주간 리스트가 있으면 추가 가능합니다.</li>'+
     '<li>항공/선박=통관번호(-ADT/DT), 공장=앞 2자리. SAMDO(DA) 제외. 2026년 7월 통관 10일까지·5월 2주 없음.</li>'+
     '<li><b class="hl">확장 분석(신규)</b>: 「법인별 통관·월별 시즌성·거래처 실효환율」은 별도 제공된 <b>통관 상세 2건</b>으로 작성했습니다. 품목코드 체계가 달라 위 지표와 <b>별도 집계</b>이며, 미얀마·SAMDO·FIRSTTECH를 포함한 <b>그룹 전체($41.2M)</b> 관점입니다.</li>'+
-    '<li><b class="hl">핵심 재해석</b>: 「긴급 항공 전환」 분석 결과, 같은 수주가 선박·항공에 <b>분할(51.4%)</b>되어 나가며 <b>전체 항공의 98.5%</b>가 선박 발주분의 긴급 급송으로 추정됩니다. 항공비 절감의 본질은 <b>발주 리드타임·선적 부킹·안전재고</b> 등 선박 실행력 개선입니다.</li>';
+    '<li><b class="hl">핵심 재해석(실측)</b>: 주간 선박·에어 요청 리스트 대조 결과, 에어 요청의 <b>91%(수량)·82%(품목)</b>가 <b>같은 주 선박 계획에도 있던 품목</b>이었습니다. 통관원장 독립 분석(수주 분할 51.4%, 항공의 98.5%)과도 일치 — 항공은 대부분 <b>선박 실패의 결과</b>이며, 절감의 본질은 <b>발주 리드타임·선적 부킹·안전재고 등 선박 이행률</b> 개선입니다.</li>';
 };
 
 /* global search -> items */
