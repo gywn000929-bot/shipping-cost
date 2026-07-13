@@ -141,7 +141,7 @@ a{color:inherit;text-decoration:none}
 }
 </style></head><body>
 <div class="wrap">
-  <aside class="side" id="side"><div class="brand"><div class="t">대아홀딩스 수입물류</div><div class="s">선박·항공·통관 분석 포털</div><div class="v">📊 v2.0 · 2025.07~2026.07</div></div><div class="navgroup"><div class="gl">요약</div><div class="navlink" data-sec="ov"><span class="ic">🏠</span>개요</div></div><div class="navgroup"><div class="gl">물동량 추이 · 주간</div><div class="navlink" data-sec="ship"><span class="ic">🚢</span>선박 추이</div><div class="navlink" data-sec="air"><span class="ic">✈️</span>항공 추이</div><div class="navlink" data-sec="fac"><span class="ic">🏭</span>공장별 분석</div></div><div class="navgroup"><div class="gl">통관 · 비용 · 월간</div><div class="navlink" data-sec="cust"><span class="ic">💰</span>통관 실적(금액)</div><div class="navlink" data-sec="airwt"><span class="ic">⚖️</span>항공 중량 분석</div><div class="navlink" data-sec="exp"><span class="ic">🧾</span>출하경비 분석</div></div><div class="navgroup"><div class="gl">검색 · 상세</div><div class="navlink" data-sec="items"><span class="ic">🔍</span>품목 검색</div><div class="navlink" data-sec="makers"><span class="ic">🏢</span>메이커·거래처</div></div><div class="navgroup"><div class="gl">확장 분석 · 신규</div><div class="navlink" data-sec="entity"><span class="ic">🌏</span>법인별 통관</div><div class="navlink" data-sec="season"><span class="ic">📅</span>월별 시즌성</div><div class="navlink" data-sec="vendor"><span class="ic">💱</span>거래처·실효환율</div></div><div class="navgroup"><div class="gl">심화 분석 · 통관원장</div><div class="navlink" data-sec="abc"><span class="ic">📈</span>파레토·ABC</div><div class="navlink" data-sec="switch"><span class="ic">🔄</span>항공→선박 전환</div><div class="navlink" data-sec="fx"><span class="ic">📉</span>환율 추이</div></div><div class="navgroup"><div class="gl">종합</div><div class="navlink" data-sec="insight"><span class="ic">📌</span>인사이트·제언</div></div></aside>
+  <aside class="side" id="side"><div class="brand"><div class="t">대아홀딩스 수입물류</div><div class="s">선박·항공·통관 분석 포털</div><div class="v">📊 v2.0 · 2025.07~2026.07</div></div><div class="navgroup"><div class="gl">요약</div><div class="navlink" data-sec="ov"><span class="ic">🏠</span>개요</div></div><div class="navgroup"><div class="gl">물동량 추이 · 주간</div><div class="navlink" data-sec="ship"><span class="ic">🚢</span>선박 추이</div><div class="navlink" data-sec="air"><span class="ic">✈️</span>항공 추이</div><div class="navlink" data-sec="fac"><span class="ic">🏭</span>공장별 분석</div></div><div class="navgroup"><div class="gl">통관 · 비용 · 월간</div><div class="navlink" data-sec="cust"><span class="ic">💰</span>통관 실적(금액)</div><div class="navlink" data-sec="airwt"><span class="ic">⚖️</span>항공 중량 분석</div><div class="navlink" data-sec="exp"><span class="ic">🧾</span>출하경비 분석</div></div><div class="navgroup"><div class="gl">검색 · 상세</div><div class="navlink" data-sec="items"><span class="ic">🔍</span>품목 검색</div><div class="navlink" data-sec="makers"><span class="ic">🏢</span>메이커·거래처</div></div><div class="navgroup"><div class="gl">확장 분석 · 신규</div><div class="navlink" data-sec="entity"><span class="ic">🌏</span>법인별 통관</div><div class="navlink" data-sec="season"><span class="ic">📅</span>월별 시즌성</div><div class="navlink" data-sec="vendor"><span class="ic">💱</span>거래처·실효환율</div></div><div class="navgroup"><div class="gl">심화 분석 · 통관원장</div><div class="navlink" data-sec="abc"><span class="ic">📈</span>파레토·ABC</div><div class="navlink" data-sec="switch"><span class="ic">🔄</span>긴급 항공 전환</div><div class="navlink" data-sec="fx"><span class="ic">📉</span>환율 추이</div></div><div class="navgroup"><div class="gl">종합</div><div class="navlink" data-sec="insight"><span class="ic">📌</span>인사이트·제언</div></div></aside>
   <div class="backdrop" id="bd"></div>
   <main class="main">
     <div class="topbar">
@@ -312,16 +312,18 @@ a{color:inherit;text-decoration:none}
   <div class="callout tip"><div class="ct">💡 관리 제언</div><ul id="abcNotes"></ul></div>
 </section>
 
-<!-- 항공→선박 전환 시뮬레이션 -->
+<!-- 긴급 항공 전환 분석 -->
 <section class="sect" id="s-switch">
-  <div class="h1"><span class="ic">🔄</span>항공 → 선박 전환 시뮬레이션</div>
-  <p class="lede">항공운임은 <b>중량 기준</b>이므로, <b>중량당 금액이 낮은(저부가·고중량)</b> 품목을 항공으로 보내면 비용 효율이 나쁩니다. 원장의 항공 건을 중량당 단가($/kg)로 평가해 <b>선박 전환 후보</b>를 선별하고 절감액을 추정합니다.</p>
+  <div class="h1"><span class="ic">🔄</span>긴급 항공 전환 분석</div>
+  <p class="lede">항공운임의 대부분은 <b>능동적 모드 선택이 아니라</b>, 선박으로 발주됐으나 선적 일정을 맞추지 못해 <b class="hl">긴급 항공으로 전환</b>되며 발생한 비용으로 추정됩니다. <b>같은 수주번호가 선박·항공 양쪽에 나타나는 '분할 주문'</b>으로 이를 식별합니다. 따라서 핵심은 "모드 전환"이 아니라 <b>선박 출하 실행력(발주 리드타임·선적 부킹·안전재고)</b> 개선입니다.</p>
+  <div class="callout warn"><div class="ct">🔎 핵심 발견 — 항공 = 선박 실패의 결과</div><ul id="swKey"></ul></div>
   <div class="kgrid" id="swKpi"></div>
-  <div class="callout warn"><div class="ct">⚠️ 방법론 · 가정</div><ul id="swMethod"></ul></div>
-  <div class="chartbox"><h4>전환 후보 상위 15 — 항공 중량(kg) 및 예상 절감액</h4><canvas id="cSw" height="110"></canvas></div>
-  <div class="h2">선박 전환 후보 품목</div><div class="h2s">중량당 단가($/kg)가 낮고 항공 중량이 큰 순 · 절감액은 가정 기반 추정치</div>
+  <div class="chartbox"><h4>월별 긴급 항공 중량 추이 (분할주문 항공분 vs 기타 항공)</h4><canvas id="cSwMon" height="95"></canvas></div>
+  <div class="chartbox"><h4>긴급 항공 상위 메이커 — 항공 중량(kg)</h4><canvas id="cSwMk" height="100"></canvas></div>
+  <div class="h2">긴급 항공 전환 추정 상위 품목</div><div class="h2s">분할주문의 항공분 중량 순 · 선박 베이스라인과 항공율을 함께 표시</div>
   <div id="swTable"></div>
-  <div class="callout tip"><div class="ct">🎯 제언</div><ul id="swNotes"></ul></div>
+  <div class="callout info"><div class="ct">📐 방법론 · 주의</div><ul id="swMethod"></ul></div>
+  <div class="callout tip"><div class="ct">🎯 제언 — 근본원인은 선박 실행력</div><ul id="swNotes"></ul></div>
 </section>
 
 <!-- 환율 추이 -->
@@ -367,7 +369,7 @@ function show(sec){
   document.querySelectorAll('.sect').forEach(s=>s.classList.remove('on'));
   document.getElementById('s-'+sec).classList.add('on');
   document.querySelectorAll('.navlink').forEach(n=>n.classList.toggle('on',n.dataset.sec===sec));
-  const lbl={ov:'개요',ship:'선박 추이',air:'항공 추이',fac:'공장별 분석',cust:'통관 실적',airwt:'항공 중량',exp:'출하경비',items:'품목 검색',makers:'메이커·거래처',entity:'법인별 통관',season:'월별 시즌성',vendor:'거래처·실효환율',abc:'파레토·ABC',switch:'항공→선박 전환',fx:'환율 추이',insight:'인사이트'}[sec];
+  const lbl={ov:'개요',ship:'선박 추이',air:'항공 추이',fac:'공장별 분석',cust:'통관 실적',airwt:'항공 중량',exp:'출하경비',items:'품목 검색',makers:'메이커·거래처',entity:'법인별 통관',season:'월별 시즌성',vendor:'거래처·실효환율',abc:'파레토·ABC',switch:'긴급 항공 전환',fx:'환율 추이',insight:'인사이트'}[sec];
   document.getElementById('crumb').innerHTML='분석 포털 · <b>'+lbl+'</b>';
   if(!rendered[sec]){ (draw[sec]||(()=>{}))(); rendered[sec]=true; }
   window.scrollTo(0,0);
@@ -683,34 +685,44 @@ draw.abc=function(){
     '<li>A등급 위주로 <b>이중 소싱·재고 안전선</b>을 설계하면 공급 리스크 대비 효율이 높습니다.</li>';
 };
 
+const Z = {"n_ord":1845,"split":948,"sea_only":717,"air_only":180,"split_pct":51.4,"tot_air_wt":144580,"tot_air_usd":2115046,"ea_wt":142385,"ea_usd":2068574,"ea_wt_pct":98.5,"ea_usd_pct":97.8,"PREM":126,"avoid":17940469,"AIR_PER_KG":181,"SEA_PER_KG":55,"top_items":[{"name":"TR 36*23*15 G5A C/T RED(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":3509,"sea_wt":9442,"ratio":27.1,"usd":18198,"cnt":25},{"name":"TR25*15*12 G5B C/T BLUE(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":3398,"sea_wt":11610,"ratio":22.6,"usd":20754,"cnt":15},{"name":"MS-308-LG-DU (400mm) (6601FA3675U) (MEC)","cat":"SWITCH","mk":"MEC","ea_wt":2536,"sea_wt":5796,"ratio":30.4,"usd":112697,"cnt":23},{"name":"RING 28-16.0-13.0 (GRY COATING)(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":2519,"sea_wt":7134,"ratio":26.1,"usd":11049,"cnt":26},{"name":"TR 36*23*15 G10A C/T BLUE (M)","cat":"F/CORE","mk":"FEELUX","ea_wt":2059,"sea_wt":18881,"ratio":9.8,"usd":11494,"cnt":21},{"name":"RING 18 C/T GRAY","cat":"F/CORE","mk":"FEELUX","ea_wt":1957,"sea_wt":13454,"ratio":12.7,"usd":17240,"cnt":28},{"name":"OP-18A(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":1880,"sea_wt":15581,"ratio":10.8,"usd":6134,"cnt":21},{"name":"MS-308-LG-DU (6601EA2001U) (L=130 MM)(ME","cat":"SWITCH","mk":"MEC","ea_wt":1757,"sea_wt":2933,"ratio":37.5,"usd":80506,"cnt":37},{"name":"VIT-300 #0 BLACK","cat":"TUBE","mk":"DAEMYUNG","ea_wt":1729,"sea_wt":11120,"ratio":13.5,"usd":4781,"cnt":30},{"name":"RING 23.5 C/T GRAY(M)","cat":"F/CORE","mk":"FEELUX","ea_wt":1661,"sea_wt":2127,"ratio":43.8,"usd":9523,"cnt":35},{"name":"EP-2813C (R28×15.4×13 K150, Ni)","cat":"F/CORE","mk":"E-TECH","ea_wt":1484,"sea_wt":15287,"ratio":8.8,"usd":5754,"cnt":8},{"name":"41802(2232111-3)","cat":"TERMINAL","mk":"AMP","ea_wt":1324,"sea_wt":20482,"ratio":6.1,"usd":13935,"cnt":15},{"name":"MEG65559702","cat":"TERMINAL BLOCK","mk":"HAENGSUNG","ea_wt":1231,"sea_wt":26395,"ratio":4.5,"usd":10933,"cnt":6},{"name":"UL1617 #20(20/0.180A)-HE BLU","cat":"WIRE","mk":"LS CABLE","ea_wt":1159,"sea_wt":6365,"ratio":15.4,"usd":10899,"cnt":23},{"name":"DIWF 0.5SQ GRY","cat":"WIRE","mk":"LS CABLE","ea_wt":1152,"sea_wt":1464,"ratio":44.0,"usd":8531,"cnt":20}],"top_mk":[{"mk":"KET","wt":24209,"usd":375988,"cnt":1351},{"mk":"LS CABLE","wt":23634,"usd":194232,"cnt":766},{"mk":"FEELUX","wt":23143,"usd":129928,"cnt":359},{"mk":"YEONHO","wt":12309,"usd":304948,"cnt":2621},{"mk":"DAEMYUNG","wt":11443,"usd":34205,"cnt":413},{"mk":"AMP","wt":8047,"usd":171082,"cnt":979},{"mk":"MOLEX","wt":6367,"usd":97995,"cnt":357},{"mk":"MEC","wt":5340,"usd":244296,"cnt":78},{"mk":"KYUNG SHIN","wt":3999,"usd":51712,"cnt":241},{"mk":"DAEIL CST","wt":3910,"usd":92096,"cnt":573}],"mon":[{"m":"25.01","ea":8897,"oth":287},{"m":"25.02","ea":13327,"oth":117},{"m":"25.03","ea":11796,"oth":205},{"m":"25.04","ea":7271,"oth":150},{"m":"25.05","ea":7659,"oth":130},{"m":"25.06","ea":6357,"oth":66},{"m":"25.07","ea":7317,"oth":124},{"m":"25.08","ea":7214,"oth":151},{"m":"25.09","ea":8575,"oth":108},{"m":"25.10","ea":9553,"oth":93},{"m":"25.11","ea":5653,"oth":104},{"m":"25.12","ea":20334,"oth":418},{"m":"26.01","ea":13457,"oth":105},{"m":"26.02","ea":4595,"oth":9},{"m":"26.03","ea":3135,"oth":29},{"m":"26.04","ea":1881,"oth":9},{"m":"26.05","ea":2088,"oth":83},{"m":"26.06","ea":1813,"oth":8},{"m":"26.07","ea":1463,"oth":1}],"peak_m":"25.12","peak_v":20334};
 draw.switch=function(){
+  document.getElementById('swKey').innerHTML=
+    '<li>전체 수주(주문)의 <b class="hl">'+Z.split_pct+'%('+N(Z.split)+'건)</b>가 <b>선박·항공에 동시 존재</b>하는 분할 주문 — 같은 주문의 일부만 항공으로 나갔습니다.</li>'+
+    '<li>이 분할 주문의 항공분이 <b>전체 항공 중량의 '+Z.ea_wt_pct+'%</b>('+N(Z.ea_wt)+'kg)·금액의 '+Z.ea_usd_pct+'%('+usd(Z.ea_usd)+')를 차지 — <b>사실상 대부분의 항공은 선박 대체가 아니라 선박 실패의 급송</b>입니다.</li>'+
+    '<li>순수 항공전용 주문은 '+N(Z.air_only)+'건뿐 — 진짜 "항공이 필수"인 물량은 소수입니다.</li>';
   document.getElementById('swKpi').innerHTML=
-    kpi('항공 중량 비율',Y.air_wt_pct,'%','전체 통관중량 대비','air')+
-    kpi('항공 중량당 단가',N(Y.air_dpk_all),'$/kg','낮을수록 전환 유리')+
-    kpi('선박 전환 후보',N(Y.cand_n),'종','저$/kg·고중량')+
-    kpi('예상 연간 절감',won(Y.cand_save),'','후보 전량 전환 시(추정)','g');
-  document.getElementById('swMethod').innerHTML=
-    '<li>후보 정의: 항공 건 중 <b>중량당 단가 &lt; 중앙값('+N(Y.med_dpk)+'$/kg)</b> 이면서 <b>항공 중량 ≥ 20kg</b>인 품목.</li>'+
-    '<li>절감 가정: 항공 출하경비 <b>'+won(Y.AIR_PER_KG)+'/kg</b> vs 선박 <b>'+won(Y.SEA_PER_KG)+'/kg</b> → 전환 시 <b>'+won(Y.PREM)+'/kg</b> 절감(기존 포털 출하경비·중량에서 도출한 <b>예시 단가</b>). 실제 요율 적용 시 값은 달라집니다.</li>'+
-    '<li>긴급 납기·라인 정지 리스크가 있는 품목은 후보에서 실무 검토로 제외해야 합니다.</li>';
-  const c=Y.top_cands;
-  if(charts.cSw)charts.cSw.destroy();
-  charts.cSw=new Chart(cSw,{type:'bar',data:{labels:c.map(x=>x.name.length>16?x.name.slice(0,16)+'…':x.name),datasets:[
-    {label:'항공 중량(kg)',data:c.map(x=>x.air_wt),backgroundColor:'#c0392b',borderRadius:3,yAxisID:'y'},
-    {label:'예상 절감액(원)',data:c.map(x=>x.save),backgroundColor:'#5a9367',borderRadius:3,yAxisID:'y1'}]},
-    options:{plugins:{legend:{position:'top',labels:{boxWidth:11}},tooltip:{callbacks:{title:i=>c[i[0].dataIndex].name}}},
-      scales:{x:{grid:{display:false},ticks:{font:{size:8.5},maxRotation:60,minRotation:45}},
-        y:{position:'left',grid:{color:'#eef2f7'},ticks:{callback:v=>N(v)+'kg'}},
-        y1:{position:'right',grid:{display:false},ticks:{callback:v=>(v/1e4).toFixed(0)+'만'}}}}});
+    kpi('분할 주문 비율',Z.split_pct,'%',N(Z.split)+' / '+N(Z.n_ord)+'건','air')+
+    kpi('긴급 항공 추정 중량',N(Z.ea_wt),'kg','전체 항공의 '+Z.ea_wt_pct+'%','air')+
+    kpi('긴급 항공 추정 금액',usd(Z.ea_usd),'','화물가 기준')+
+    kpi('회피가능 절감',won(Z.avoid),'','선박 전량 이행 시(추정)','g');
+  const mon=Z.mon;
+  if(charts.cSwMon)charts.cSwMon.destroy();
+  charts.cSwMon=new Chart(cSwMon,{type:'bar',data:{labels:mon.map(x=>x.m),datasets:[
+    {label:'긴급 항공(분할주문)',data:mon.map(x=>x.ea),backgroundColor:'#c0392b',borderRadius:3},
+    {label:'기타 항공',data:mon.map(x=>x.oth),backgroundColor:'#a9c6e2',borderRadius:3}]},
+    options:{plugins:{legend:{position:'top',labels:{boxWidth:11}},tooltip:{callbacks:{label:x=>x.dataset.label+': '+N(x.parsed.y)+'kg'}}},
+      scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#eef2f7'},ticks:{callback:v=>(v/1000).toFixed(0)+'t'}}}}});
+  const mk=Z.top_mk;
+  if(charts.cSwMk)charts.cSwMk.destroy();
+  charts.cSwMk=new Chart(cSwMk,{type:'bar',data:{labels:mk.map(x=>x.mk),datasets:[{data:mk.map(x=>x.wt),backgroundColor:'#c0392b',borderRadius:4}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>N(x.parsed.x)+'kg · '+usd(mk[x.dataIndex].usd)}}},
+      scales:{x:{grid:{color:'#eef2f7'},ticks:{callback:v=>(v/1000).toFixed(0)+'t'}},y:{grid:{display:false}}}}});
   let rows='';
-  c.forEach((x,i)=>{ rows+=`<tr><td class="rk">${i+1}</td><td class="nm" style="font-size:12px">${x.name}</td><td class="sub">${x.cat}</td><td class="sub">${x.maker}</td><td class="num tot">${N(x.air_wt)}</td><td class="num">${usd(x.air_usd)}</td><td class="num">$${x.dpk}</td><td class="num">${x.air_cnt}</td><td class="num" style="color:#5a9367;font-weight:800">${won(x.save)}</td></tr>`; });
-  document.getElementById('swTable').innerHTML=`<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>품목명</th><th>계정</th><th>메이커</th><th class="num">항공중량(kg)</th><th class="num">항공금액</th><th class="num">$/kg</th><th class="num">건수</th><th class="num">예상절감</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  Z.top_items.forEach((x,i)=>{ const base=x.sea_wt;
+    const bar=`<div class="mfbar" title="항공 ${x.ratio}%"><span style="width:${x.ratio}%;background:#c0392b"></span><span style="width:${100-x.ratio}%;background:#a9c6e2"></span></div>`;
+    rows+=`<tr><td class="rk">${i+1}</td><td class="nm" style="font-size:12px">${x.name}</td><td class="sub">${x.cat}</td><td class="sub">${x.mk}</td><td class="num tot" style="color:#c0392b">${N(x.ea_wt)}</td><td class="num">${N(base)}</td><td class="num">${x.ratio}%</td><td style="min-width:90px">${bar}</td><td class="num">${usd(x.usd)}</td><td class="num">${x.cnt}</td></tr>`; });
+  document.getElementById('swTable').innerHTML=`<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>품목명</th><th>계정</th><th>메이커</th><th class="air num">긴급항공(kg)</th><th class="num">선박(kg)</th><th class="num">항공율</th><th>항공/선박</th><th class="num">항공금액</th><th class="num">건수</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.getElementById('swMethod').innerHTML=
+    '<li><b>식별 기준</b>: 동일 수주번호(발주 단위)가 선박·항공 통관에 <b>동시 존재</b>하면, 그 항공분을 "긴급 전환 추정"으로 분류했습니다.</li>'+
+    '<li><b>주의</b>: 강력한 추정 신호이나 100% 확증은 아닙니다. 일부는 애초에 소량 급송이 계획된 정상 항공일 수 있습니다.</li>'+
+    '<li><b>절감 가정</b>: 항공 '+won(Z.AIR_PER_KG)+'/kg vs 선박 '+won(Z.SEA_PER_KG)+'/kg → 전환 시 '+won(Z.PREM)+'/kg 절감(기존 포털 출하경비·중량에서 도출한 예시 단가).</li>';
   document.getElementById('swNotes').innerHTML=
-    '<li>후보 <b>'+N(Y.cand_n)+'종·'+N(Y.cand_wt)+'kg</b>을 선박으로 전환하면 최대 <b class="hl">'+won(Y.cand_save)+'/년</b> 수준의 출하경비 절감이 가능합니다(추정).</li>'+
-    '<li>1순위는 <b>'+c[0].maker+'</b>의 <b>'+c[0].cat+'</b>류(고무 코어·튜브 등) — 저단가·고부피로 항공 효율이 특히 나쁩니다.</li>'+
-    '<li>반대로 <b>$/kg가 높은</b> 소형 고단가 부품은 항공 유지가 합리적이므로 전환 대상에서 제외합니다.</li>';
+    '<li>긴급 항공은 <b>'+Z.peak_m+'월('+N(Z.peak_v)+'kg)</b>에 정점 — 연말·연초 선적 성수기/스케줄 혼잡과 겹칩니다. <b>성수기 선(先)선적·조기 발주</b>가 1순위 대책입니다.</li>'+
+    '<li>메이커 <b>'+Z.top_mk[0].mk+'·'+Z.top_mk[1].mk+'·'+Z.top_mk[2].mk+'</b>에 긴급 항공이 집중 — 해당 공급사 <b>발주 리드타임·선박 부킹</b>을 집중 점검하세요.</li>'+
+    '<li>품목별 <b>항공율</b>이 높을수록 선박 이행 실패가 잦다는 뜻 — 상위 품목에 <b>안전재고</b>를 두면 급송 자체를 줄일 수 있습니다.</li>'+
+    '<li>이행률을 개선해 긴급 항공을 절반만 줄여도 연 <b class="hl">'+won(Math.round(Z.avoid/2))+'</b> 수준의 출하경비 절감이 가능합니다(추정).</li>';
 };
-
 draw.fx=function(){
   const f=Y.fx;
   document.getElementById('fxKpi').innerHTML=
@@ -733,9 +745,9 @@ draw.insight=function(){
   document.getElementById('insA').innerHTML=
     '<li>항공 화물금액 비중 <b>'+ins.air_usd_pct_exp+'%</b>(경비 자료 2025.09~2026.06) vs <b>경비 비중 '+ins.air_exp_pct+'%</b> — 경비가 2배 이상 무겁습니다.</li>'+
     '<li>화물 $1당 경비: 항공 '+won(ins.air_won_per_usd)+' = 선박('+won(ins.sea_won_per_usd)+')의 <b class="hl">'+ins.usd_ratio+'배</b>.</li>'+
-    '<li>→ 항공 물량을 줄이면 <b>경비 절감 레버리지가 매우 큽니다</b>. 긴급도가 낮은 품목은 선박 전환 검토.</li>';
+    '<li>→ 항공 물량을 줄이면 <b>경비 절감 레버리지가 매우 큽니다</b>. 다만 원장 분석 결과, 항공의 대부분은 <b class="hl">선박 발주분의 긴급 전환</b>(「긴급 항공 전환」 참조)이라 <b>모드 선택보다 선박 실행력 개선</b>이 핵심입니다.</li>';
   document.getElementById('insB').innerHTML=
-    '<li>항공 중량 1위 <b>FEELUX</b>('+N(a.air_mk[0].wt)+'kg): 고무 링·튜브류로 <b>저단가·고부피</b> → 선박 전환 최우선 후보.</li>'+
+    '<li>항공 중량 1위 <b>FEELUX</b>('+N(a.air_mk[0].wt)+'kg): 고무 링·튜브류로 <b>저단가·고부피</b>. 대부분 선박 베이스라인이 있는 <b>긴급 항공 전환분</b>이라, 이 공급사의 선박 이행률을 높이면 항공비가 크게 줄어듭니다.</li>'+
     '<li>반면 <b>MEC·HIROSE</b>는 중량 대비 금액이 커 고단가 부품 → 항공 정당성 있음.</li>'+
     '<li>항공 중량 비율은 월 최대 '+ins.ap_max+'%까지 올랐다가 <b>최근 '+ins.ap_last+'%대로 안정</b> — 이 추세 유지가 목표.</li>';
   document.getElementById('insC').innerHTML=
@@ -747,7 +759,8 @@ draw.insight=function(){
     '<li><b>출하경비</b>는 <b>2025년 9월~2026년 6월(10개월)</b> 자료입니다.</li>'+
     '<li><b>주간 물동량</b>(선박·항공·공장별 추이)만 <b>2026년 3~7월</b>분이라 2025년이 없습니다. 주간 리스트가 있으면 추가 가능합니다.</li>'+
     '<li>항공/선박=통관번호(-ADT/DT), 공장=앞 2자리. SAMDO(DA) 제외. 2026년 7월 통관 10일까지·5월 2주 없음.</li>'+
-    '<li><b class="hl">확장 분석(신규)</b>: 「법인별 통관·월별 시즌성·거래처 실효환율」은 별도 제공된 <b>통관 상세 2건</b>으로 작성했습니다. 품목코드 체계가 달라 위 지표와 <b>별도 집계</b>이며, 미얀마·SAMDO·FIRSTTECH를 포함한 <b>그룹 전체($41.2M)</b> 관점입니다.</li>';
+    '<li><b class="hl">확장 분석(신규)</b>: 「법인별 통관·월별 시즌성·거래처 실효환율」은 별도 제공된 <b>통관 상세 2건</b>으로 작성했습니다. 품목코드 체계가 달라 위 지표와 <b>별도 집계</b>이며, 미얀마·SAMDO·FIRSTTECH를 포함한 <b>그룹 전체($41.2M)</b> 관점입니다.</li>'+
+    '<li><b class="hl">핵심 재해석</b>: 「긴급 항공 전환」 분석 결과, 같은 수주가 선박·항공에 <b>분할(51.4%)</b>되어 나가며 <b>전체 항공의 98.5%</b>가 선박 발주분의 긴급 급송으로 추정됩니다. 항공비 절감의 본질은 <b>발주 리드타임·선적 부킹·안전재고</b> 등 선박 실행력 개선입니다.</li>';
 };
 
 /* global search -> items */
